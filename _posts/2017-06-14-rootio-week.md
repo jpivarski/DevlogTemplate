@@ -14,3 +14,11 @@ category: ROOT I/O Week
    * Re-measured on an uncompressed file. The `memcpy` is still 0.08 ns/byte, 11.1 GB/sec, but now that adds up to 41% of the total because the `GetEntriesSerialized` is 44.7 times faster (it doesn't have to decompress). In fact, if my `memcpy` is 41% of the total, it's highly likely that a `GetEntriesSerialized` for uncompressed data is just a memory copy, too.
 
    * Raw data in [memcpy_timing.txt](data/memcpy_timing.txt).
+
+   * Merged with Brian's API changes and recompiled.
+
+```bash
+git checkout root-bulkapi-fastread-v2
+git pull https://github.com/bbockelm/root.git root-bulkapi-fastread-v2
+git push origin root-bulkapi-fastread-v2
+```
