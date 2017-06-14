@@ -22,3 +22,7 @@ git checkout root-bulkapi-fastread-v2
 git pull https://github.com/bbockelm/root.git root-bulkapi-fastread-v2
 git push origin root-bulkapi-fastread-v2
 ```
+
+   * My sample code compiles again.
+
+   * Wrote new interfaces on the Google doc ("book" icon at the top of this page).
