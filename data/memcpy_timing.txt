@@ -1,0 +1,194 @@
+on a quiet machine
+
+========================================
+
+start without
+
+without 2.13371 sec
+with memcpy 1.76256 sec
+without 1.73872 sec
+with memcpy 1.76155 sec
+without 1.73549 sec
+with memcpy 1.76292 sec
+without 1.73556 sec
+with memcpy 1.76141 sec
+without 1.74052 sec
+with memcpy 1.76154 sec
+without 1.7358 sec
+with memcpy 1.76414 sec
+without 1.7354 sec
+with memcpy 1.76092 sec
+without 1.73621 sec
+with memcpy 1.76152 sec
+without 1.73669 sec
+with memcpy 1.76198 sec
+without 1.73557 sec
+
+dropping first two:
+
+with memcpy
+
+[1.76155, 1.76292, 1.76141, 1.76154, 1.76414, 1.76092, 1.76152, 1.76198]
+1.762 +- 0.001
+
+without
+
+[1.73872, 1.73549, 1.73556, 1.74052, 1.7358, 1.7354, 1.73621, 1.73669, 1.73557]
+1.737 +- 0.002
+
+diff = 0.025 +- 0.002
+
+========================================
+
+start with memcpy
+
+with memcpy 2.05592 sec
+without 1.73948 sec
+with memcpy 1.76441 sec
+without 1.73945 sec
+with memcpy 1.76522 sec
+without 1.73952 sec
+with memcpy 1.76452 sec
+without 1.73945 sec
+with memcpy 1.76436 sec
+without 1.73937 sec
+with memcpy 1.76462 sec
+without 1.73933 sec
+with memcpy 1.76448 sec
+without 1.73975 sec
+with memcpy 1.76514 sec
+without 1.73979 sec
+with memcpy 1.76426 sec
+without 1.73975 sec
+with memcpy 1.76491 sec
+without 1.73914 sec
+
+with memcpy
+
+[1.76441, 1.76522, 1.76452, 1.76436, 1.76462, 1.76448, 1.76514, 1.76426, 1.76491]
+1.7647 +- 0.0003
+
+without
+
+[1.73945, 1.73952, 1.73945, 1.73937, 1.73933, 1.73975, 1.73979, 1.73975, 1.73914]
+1.7395 +- 0.0002
+
+diff = 0.0252 +- 0.0003
+
+========================================
+
+Conclusion
+
+The memcpy effect is observable and takes 0.0252 sec to copy 751919 4-byte floats (3007676 bytes) one hundred times (effectively 300767600 bytes): 0.08 ns/byte, 11.1 GB/sec, 2.98 GHz 4-byte processing, 1.49 GHz 8-byte processing.
+
+Also, this is 1.4% of the GetEntriesSerialized (decompression) time. When data must be decompressed (always), the effect of a memcpy is insignificant.
+
+By dropping the first two measurements, we work with warmed cache (no disk overhead).
+
+========================================
+
+Do it all again with two versions of the file that differ in compressed and uncompressed.
+
+Uncompressed:
+
+with memcpy 0.11193 sec
+without 0.069372 sec
+with memcpy 0.110623 sec
+without 0.069267 sec
+with memcpy 0.108186 sec
+without 0.064301 sec
+with memcpy 0.102642 sec
+without 0.064168 sec
+with memcpy 0.102521 sec
+without 0.063933 sec
+with memcpy 0.089464 sec
+without 0.037059 sec
+with memcpy 0.060281 sec
+without 0.037343 sec
+with memcpy 0.060138 sec
+without 0.036874 sec
+with memcpy 0.060072 sec
+without 0.036973 sec
+with memcpy 0.060189 sec
+without 0.036878 sec
+
+without 0.067315 sec
+with memcpy 0.109568 sec
+without 0.067207 sec
+with memcpy 0.109097 sec
+without 0.067487 sec
+with memcpy 0.108888 sec
+without 0.067479 sec
+with memcpy 0.103755 sec
+without 0.035924 sec
+with memcpy 0.059516 sec
+without 0.035965 sec
+with memcpy 0.059462 sec
+without 0.035959 sec
+with memcpy 0.059462 sec
+without 0.035965 sec
+with memcpy 0.059463 sec
+without 0.036149 sec
+with memcpy 0.059559 sec
+without 0.036021 sec
+
+Takes many more iterations to settle down. Let's take the last three measurements.
+
+with memcpy, with first: 0.0601 without first: 0.0595
+without, with first: 0.0369 without first: 0.0360
+
+diff, with first: 0.0232 without first: 0.0235
+
+Compressed:
+
+with memcpy 2.03992 sec
+without 1.61231 sec
+with memcpy 1.64163 sec
+without 1.6125 sec
+with memcpy 1.63867 sec
+without 1.61194 sec
+with memcpy 1.63786 sec
+without 1.61222 sec
+with memcpy 1.63824 sec
+without 1.61191 sec
+with memcpy 1.63939 sec
+without 1.61231 sec
+with memcpy 1.63862 sec
+without 1.61192 sec
+with memcpy 1.63784 sec
+without 1.61206 sec
+with memcpy 1.63848 sec
+without 1.61184 sec
+with memcpy 1.63806 sec
+without 1.61241 sec
+
+without 1.9239 sec
+with memcpy 1.63819 sec
+without 1.61101 sec
+with memcpy 1.70244 sec
+without 1.61026 sec
+with memcpy 1.63558 sec
+without 1.61012 sec
+with memcpy 1.6354 sec
+without 1.60984 sec
+with memcpy 1.63532 sec
+without 1.61034 sec
+with memcpy 1.63546 sec
+without 1.6101 sec
+with memcpy 1.63553 sec
+without 1.61019 sec
+with memcpy 1.6352 sec
+without 1.60988 sec
+with memcpy 1.63507 sec
+without 1.61018 sec
+
+with memcpy, with first: 1.6381 without first: 1.6353
+without, with first: 1.6121 without first: 1.6101
+
+diff, with first: 0.0260 without first: 0.0252
+
+========================================
+
+Okay, so that's the same 0.025 sec as before (roughly), so the rate of memcpy is clearly 0.08 ns/byte, 11.1 GB/sec.
+
+But now the no-compression GetEntriesSerialized time is 0.036 sec, which means that memcpy is 41% of the total time. It's almost as if GetEntriesSerialized is just a memcpy and by doing one more, I've doubled the time.
