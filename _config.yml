@@ -19,10 +19,7 @@ name: Jim Pivarski
 title: devlog-tbranch-numpy
 description: Low-level interface providing TBranch to Numpy array filling in ROOT
 
-gh_name: ???
 gh_commits: https://github.com/jpivarski/devlog-tbranch-numpy/tree/gh-pages/_posts
-gh_prs: ???
-gh_issues: ???
 gh_project: https://github.com/jpivarski/devlog-tbranch-numpy
 
 # -------------------------------------
