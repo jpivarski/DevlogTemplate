@@ -10,3 +10,5 @@ category: ROOT I/O Week
    * Learned how to make iterators in Python C API (Pythons 2 and 3).
 
    * Solved iteration problem with a `deque<TBufferFile>` (temporarily checked in as `test.cxx`).
+
+   * Merged with Brian's changes and recompiled.
