@@ -7,7 +7,7 @@ category: Second Week
 
    * Getting good performance results.
 
-![performance](/devlog-tbranch-numpy/data/chart.png)
+<img src="data/chart.png" style="width: 100%">
 
    * The first four groups all use the new BulkIO --> Numpy interface, some merely viewing the data (ROOT owns the buffer) and some actually copying (Numpy owns the buffer); the difference is about 20% in the smallest bars (uncompressed data), but hard to see on the scale of everything else.
 
